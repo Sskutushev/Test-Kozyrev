@@ -1,0 +1,10 @@
+{
+  "*.js": [
+    "eslint --fix",
+    "prettier --write",
+    "jest --bail --findRelatedTests"
+  ],
+  "*.{html,css,md}": [
+    "prettier --write"
+  ]
+}

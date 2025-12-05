@@ -1,0 +1,473 @@
+// === SETTINGS ===
+// Variables
+$colors: (
+  primary: #FF3F3A,
+  marketing: #03CEA4,
+  design: #F52F6E,
+  management: #5A87FB,
+  hr: #F89828,
+  development: #7772F1,
+  text-dark: #1E212C,
+  text-gray: #787A80,
+  text-light: #999CA4,
+  bg-light: #FFFFFF,
+  bg-page: #F4F5F7,
+  border-light: #E5E8ED
+);
+
+// Responsive mixins
+@mixin fluid-size($property, $min-size, $max-size, $min-width: 320, $max-width: 1920) {
+  #{$property}: calc(#{$min-size}px + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}px) / (#{$max-width} - #{$min-width})));
+}
+
+@mixin container {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 0 clamp(15px, 4vw, 15px);
+}
+
+// === BASE STYLES ===
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: map-get($colors, bg-page);
+  color: map-get($colors, text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// === BLOCKS ===
+
+// Block: page
+.page {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(40px, 8vw, 100px) 0;
+
+  @include container;
+
+  &__bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  &__shape {
+    position: absolute;
+
+    &--1 {
+      top: 10%;
+      right: 5%;
+      width: clamp(50px, 10vw, 150px);
+      height: clamp(50px, 10vw, 150px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    &--2 {
+      bottom: 15%;
+      left: 3%;
+      width: clamp(40px, 8vw, 120px);
+      height: clamp(40px, 8vw, 120px);
+      animation: float 8s ease-in-out infinite reverse;
+    }
+  }
+}
+
+// Block: page-header
+.page-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 80px);
+
+  &__subtitle {
+    @include fluid-size(font-size, 12, 16);
+    letter-spacing: 1px;
+    color: map-get($colors, text-dark);
+    margin-bottom: clamp(8px, 1vw, 8px);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  &__title {
+    @include fluid-size(font-size, 28, 46);
+    font-weight: 700;
+    line-height: 1.3;
+    color: map-get($colors, text-dark);
+  }
+}
+
+// Block: filters
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2vw, 24px);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(40px, 5vw, 60px);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+// Block: tabs
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.2vw, 12px);
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: clamp(8px, 1vw, 10px) clamp(16px, 2vw, 20px);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+
+    &:hover:not(&--active) {
+      background-color: rgba(#000, 0.05);
+    }
+
+    &:focus {
+      outline: 2px solid map-get($colors, primary);
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background-color: rgba(map-get($colors, primary), 0.1);
+
+      .tabs__text {
+        color: map-get($colors, primary);
+      }
+
+      .tabs__count {
+        color: map-get($colors, primary);
+      }
+    }
+  }
+
+  &__text {
+    @include fluid-size(font-size, 14, 16);
+    color: map-get($colors, text-light);
+    transition: color 0.3s ease;
+    font-weight: 400;
+  }
+
+  &__count {
+    font-size: 10px;
+    color: map-get($colors, text-light);
+    transition: color 0.3s ease;
+    line-height: 1.5;
+  }
+}
+
+// Block: search
+.search {
+  position: relative;
+  width: 100%;
+  max-width: 315px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    padding: clamp(10px, 1.2vw, 12px) clamp(12px, 2vw, 16px);
+    padding-left: clamp(36px, 4vw, 44px);
+    border: 1px solid map-get($colors, border-light);
+    border-radius: 4px;
+    font-family: inherit;
+    @include fluid-size(font-size, 13, 14);
+    background-color: #fff;
+    transition: all 0.3s ease;
+    color: map-get($colors, text-dark);
+
+    &:focus {
+      outline: none;
+      border-color: map-get($colors, primary);
+      box-shadow: 0 0 0 3px rgba(map-get($colors, primary), 0.1);
+    }
+
+    &::placeholder {
+      color: map-get($colors, text-light);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    left: clamp(12px, 1.5vw, 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: map-get($colors, text-light);
+    pointer-events: none;
+  }
+}
+
+// Block: courses
+.courses {
+  &__grid {
+    display: grid;
+    gap: clamp(20px, 3vw, 30px);
+    margin-bottom: clamp(40px, 5vw, 60px);
+
+    // Responsive grid without breakpoints
+    // 1 column on mobile (320px-767px)
+    grid-template-columns: 1fr;
+
+    // 2 columns on tablets (768px-1199px)
+    @media (min-width: 768px) and (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    // 3 columns on desktops (1200px+)
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__view-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto;
+    padding: clamp(12px, 1.5vw, 16px) clamp(32px, 4vw, 48px);
+    background: transparent;
+    border: 1px solid map-get($colors, border-light);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    @include fluid-size(font-size, 14, 16);
+    color: map-get($colors, text-dark);
+    font-weight: 700;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: map-get($colors, primary);
+      color: map-get($colors, primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(map-get($colors, primary), 0.15);
+
+      .courses__view-icon {
+        color: map-get($colors, primary);
+        transform: rotate(90deg);
+      }
+    }
+
+    &:focus {
+      outline: 2px solid map-get($colors, primary);
+      outline-offset: 2px;
+    }
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__view-icon {
+    width: 20px;
+    height: 20px;
+    color: map-get($colors, text-dark);
+    transition: all 0.3s ease;
+  }
+}
+
+// Block: course-card
+.course-card {
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(#9A9CA5, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(#9A9CA5, 0.15);
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 390 / 240;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__content {
+    padding: clamp(20px, 2.5vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 20px);
+  }
+
+  &__title {
+    @include fluid-size(font-size, 16, 20);
+    font-weight: 700;
+    line-height: 1.5;
+    color: map-get($colors, text-dark);
+    min-height: 3em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__price {
+    @include fluid-size(font-size, 16, 18);
+    font-weight: 700;
+    color: map-get($colors, primary);
+  }
+
+  &__divider {
+    width: 1px;
+    height: 16px;
+    background-color: map-get($colors, text-gray);
+    opacity: 0.3;
+    transform: rotate(-15deg);
+  }
+
+  &__author {
+    @include fluid-size(font-size, 14, 18);
+    color: map-get($colors, text-gray);
+  }
+
+  // Modifier: hidden
+  &--hidden {
+    display: none;
+  }
+}
+
+// Block: badge
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 700;
+  color: #fff;
+  width: fit-content;
+
+  &--marketing {
+    background-color: map-get($colors, marketing);
+  }
+
+  &--design {
+    background-color: map-get($colors, design);
+  }
+
+  &--management {
+    background-color: map-get($colors, management);
+  }
+
+  &--hr {
+    background-color: map-get($colors, hr);
+  }
+
+  &--development {
+    background-color: map-get($colors, development);
+  }
+}
+
+// === ANIMATIONS ===
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+// Delays for cascade animation
+@for $i from 1 through 18 {
+  .course-card:nth-child(#{$i}) {
+    animation-delay: #{($i - 1) * 0.08}s;
+  }
+}
+
+// === RESPONSIVENESS ===
+// Additional settings for mobile devices
+@media (max-width: 480px) {
+  .tabs {
+    justify-content: center;
+
+    &__item {
+      flex: 1 1 auto;
+      min-width: fit-content;
+    }
+  }
+}
+
+// _ Hidden text for screen readers _/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// _ Enhanced focus for keyboard navigation _/
+*:focus-visible {
+  outline: 2px solid #FF3F3A;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+// _ Skip to main content _/
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #FF3F3A;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}

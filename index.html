@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' 'unsafe-inline';
+                   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' https: data:;">
+    
+    <!-- Security: X-Content-Type-Options -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- Security: Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <title>Online Courses - Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#coursesGrid" class="skip-link">Skip to courses</a>
+    
+    <main class="page">
+        <!-- Page header -->
+        <section class="page-header">
+            <p class="page-header__subtitle">ENJOY YOUR STUDYING!</p>
+            <h1 class="page-header__title">Our online courses</h1>
+        </section>
+
+        <!-- Filters and search panel -->
+        <section class="filters">
+            <div class="filters__tabs tabs" role="tablist" aria-label="Course categories">
+                <button class="tabs__item tabs__item--active" 
+                        data-category="all"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="coursesGrid"
+                        id="tab-all">
+                    <span class="tabs__text">All</span>
+                    <span class="tabs__count" aria-label="17 courses">17</span>
+                </button>
+                <button class="tabs__item" 
+                        data-category="marketing"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="coursesGrid"
+                        id="tab-marketing">
+                    <span class="tabs__text">Marketing</span>
+                    <span class="tabs__count" aria-label="4 courses">4</span>
+                </button>
+                <button class="tabs__item" 
+                        data-category="management"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="coursesGrid"
+                        id="tab-management">
+                    <span class="tabs__text">Management</span>
+                    <span class="tabs__count" aria-label="3 courses">3</span>
+                </button>
+                <button class="tabs__item" 
+                        data-category="hr"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="coursesGrid"
+                        id="tab-hr">
+                    <span class="tabs__text">HR & Recruiting</span>
+                    <span class="tabs__count" aria-label="5 courses">5</span>
+                </button>
+                <button class="tabs__item" 
+                        data-category="design"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="coursesGrid"
+                        id="tab-design">
+                    <span class="tabs__text">Design</span>
+                    <span class="tabs__count" aria-label="3 courses">2</span>
+                </button>
+                <button class="tabs__item" 
+                        data-category="development"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="coursesGrid"
+                        id="tab-development">
+                    <span class="tabs__text">Development</span>
+                    <span class="tabs__count" aria-label="3 courses">3</span>
+                </button>
+            </div>
+
+            <div class="filters__search search">
+                <label for="searchInput" class="sr-only">Search courses</label>
+                <input type="search" 
+                       id="searchInput"
+                       class="search__input"
+                       placeholder="Search course..."
+                       aria-label="Search courses"
+                       role="searchbox"
+                       autocomplete="off">
+                <svg class="search__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667ZM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Course cards grid -->
+        <section class="courses">
+            <div class="courses__grid" id="coursesGrid" role="region" aria-label="Course listings">
+                <!-- Cards are generated by JS (18 total) -->
+            </div>
+
+            <!-- "Load More" button (shown when there are hidden cards) -->
+            <button class="load-more"
+                    id="loadMoreBtn"
+                    aria-label="Load more courses">
+                <img class="convert" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAISSURBVHgB7VXRcdpAEN29JP6mBLkDu4IIDCR/OZICDBVYrgCoILgCSANBv0GxpBKcClAJ/sxM4nvZPSEbPBboM/b4zQhOd/t2b0+774ieO1h/2t3Bgpneuz84zfP4tloMQ9t6847OwSYkwgmBgs3SDTEXTC6+XsXfDgbo9O2awIEEOJYAhc6d9a2F47lYtGg/CmZM6gKZpyY7/c9fAV6qcwA5EyINniZL1scRTuUZQZyLeSC2C+GMG2Vgjsw5AROAbsXxNP0Zz2gPwq6NmHjMminzLF19v6zNwBzRsHIORvuQc0UuNmqrHOFGerS1AcjxRZkWpnkS31BDqC2Eo2M5rrkWR7W2c0Q1/OJxddWh3Rtk4jCUMKM0iRf3GUjUoo4E3WED56UtfCU59rRX/CfgatDp2aG8zqXth4f05YEzWMtfUOM4v06W7Yc+wEZzwENqAK31faWCTWDeJvBbXvuWN7hMfxzu4m2c9b5cgNzMS0wpkIXo1vF9Blrr0vKljjgehz170tS52gJu4ndssLOxHamQll/A4UqGLUOcdT7YiBrs3IAzL+vA1Bna+X78FKnTtRNRxkp+vd7fgX5V+iTHGchF9MkR21IafBdfZUkchR9tYO5YP74/Iqb6tIdehmuqpIJXXoNRvopjz3sUwNQR9bgyMdCLRSpLyCi23BY6pxcR/sotuHHu8VsC+ouIc3oR+Afr1xb3ngcedgAAAABJRU5ErkJggg==" aria-hidden="true"/>
+                <div class="loadmore">Load more</div>
+            </button>
+        </section>
+
+        <!-- Background decorative elements -->
+        <div class="page__bg-shapes" aria-hidden="true">
+            <img class="page__shape page__shape--1" src="Upgrade/assets/dots.svg" alt="" width="143" height="105">
+            <img class="page__shape page__shape--2" src="Upgrade/assets/shapes.svg" alt="" width="83" height="44">
+            <img class="page__shape page__shape--3" src="Upgrade/assets/shapes (1).svg" alt="" width="85" height="85">
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

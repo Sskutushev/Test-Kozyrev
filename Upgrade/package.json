@@ -1,0 +1,57 @@
+{
+  "name": "online-courses-catalog",
+  "version": "1.0.0",
+  "description": "Adaptive online courses catalog with filters and search",
+  "scripts": {
+    "prepare": "husky install",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint ../script.js",
+    "lint:fix": "eslint ../script.js --fix",
+    "format": "prettier --write \"../*.{js,html,css,md}\" \"**/*.{js,css,md}\"",
+    "validate": "npm run lint && npm run test",
+    "optimize:images": "node scripts/optimize-images.js",
+    "build:css": "cleancss -o dist/styles.min.css ../styles.css",
+    "build:js": "terser ../script.js -o dist/script.min.js --compress --mangle",
+    "build:html": "html-minifier ../index.html -o dist/index.html --collapse-whitespace --remove-comments --remove-attribute-quotes --use-short-doctype",
+    "build": "npm run optimize:images && npm run build:css && npm run build:js && npm run build:html",
+    "precommit": "lint-staged",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0",
+    "clean-css-cli": "^5.6.3",
+    "eslint": "^8.50.0",
+    "html-minifier": "^4.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "sharp": "^0.33.0",
+    "standard-version": "^9.5.0",
+    "terser": "^5.24.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "../script.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.js"
+    ]
+  }
+}

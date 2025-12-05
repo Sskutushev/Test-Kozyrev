@@ -1,0 +1,26 @@
+# Node specific
+node_modules
+npm-debug.log
+coverage
+
+# Build output
+dist
+
+# Git
+.git
+.gitignore
+
+# Config files not needed in the image
+.eslintrc.json
+.prettierrc
+.lintstagedrc.json
+.versionrc.json
+lighthouserc.js
+README.md
+plan.md
+
+# Other
+.husky
+tests
+scripts
+docs

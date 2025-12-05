@@ -53,8 +53,8 @@ body {
 }
 .page__shape--3 {
   position: absolute;
-  left: 1763px;  
-  top: 785px;
+  left: 1720px;  
+  top: 800px;
   width: 85px;
   height: 85px;
   animation: float 7s ease-in-out infinite;

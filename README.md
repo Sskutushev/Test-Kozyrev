@@ -1,10 +1,5 @@
 # Online Courses Catalog
 
-[![CI/CD Pipeline](https://github.com/Sskutushev/Test-Kozyrev/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Sskutushev/Test-Kozyrev/actions)
-[![codecov](https://codecov.io/gh/Sskutushev/Test-Kozyrev/branch/main/graph/badge.svg)](https://codecov.io/gh/Sskutushev/Test-Kozyrev)
-[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-90%2B-brightgreen.svg)](https://web.dev/measure/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A production-ready, adaptive online course catalog featuring filtering, search, and pagination. This project demonstrates a professional frontend workflow, including comprehensive testing, CI/CD automation, performance optimization, and containerization.
 
 ## Live Demo
